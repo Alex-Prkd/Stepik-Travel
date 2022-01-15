@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block body %}
+  <main class="container mt-3">
+      <h1 class="display-5 mt-4">Летим {{ data.departures[dep][0].lower() + data.departures[dep][1:] }}</h1>
+    <p class="mb-4">Найдено {{ tours|length }} {% if tours|length >4 %}туров {% else %}тура{% endif %},
+      от {{ min_price }} до {{ max_price}} и от {{ min_night }} ночей до {{ max_night }} ночей</p>
+    <!-- CARDS -->
+    <div class="row mt-5">
+      {% for item, tour in tours.items() %}
+        <div class="col-4">
+          <div class="card mb-4">
+            <div class="embed-responsive embed-responsive-16by9">
+               <img class="card-img-top embed-responsive-item" src="{{ tours[item]['picture'] }}" alt="" />
+            </div>
+            <div class="card-body">
+              <h2 class="h5 card-title">{{ tour['title']}}</h2>
+              <p class="card-text">{{ tour['description']|truncate(100) }}</p>
+              <a href="{{ url_for('tour', id=item) }}" class="btn btn-sm btn-primary">Подробнее</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+ {% endblock %}

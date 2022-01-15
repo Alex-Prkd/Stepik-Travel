@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <main class="container mt-3">
+    <!-- HERO -->
+    <section class="jumbotron text-center mt-4" style="background: url('https://s1.1zoom.ru/b5050/597/426266-Kycb_3840x2400.jpg'); background-position: center center">
+      <h1 class="display-4">Туры</h1>
+      <p class="lead">{{ data.subtitle }}</p>
+      <p class="mt-5 w-50 mx-auto">{{ data.description }}</p>
+    </section>
+    <!-- CARDS -->
+    <div class="row mt-5">
+      {% for item in range(1, 7) %}
+        <div class="col-4">
+          <div class="card mb-4">
+            <div class="embed-responsive embed-responsive-16by9">
+               <img class="card-img-top embed-responsive-item" src="{{ tours[item]['picture'] }}" alt="" />
+            </div>
+            <div class="card-body">
+              <h2 class="h5 card-title">{{ tours[item]['title'] }}</h2>
+              <p class="card-text">{{ tours[item]['description'] | truncate(75) }}</p>
+              <a href="{{ url_for('tour', id=item) }}" class="btn btn-sm btn-primary">Подробнее</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+{% endblock %}
+
+
